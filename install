@@ -81,15 +81,20 @@ fi
 
 combo="$os-$arch"
 case "$combo" in
-  linux-x64|linux-arm64|darwin-x64|darwin-arm64)
+  linux-x64|darwin-arm64)
+    ;;
+  darwin-x64)
+    echo -e "${ORANGE}Note: macOS Intel binaries not yet available. Using Rosetta 2 with ARM64 binary.${NC}"
+    combo="darwin-arm64"
     ;;
   *)
     echo -e "${RED}Unsupported OS/Arch: $os/$arch${NC}"
+    echo -e "${MUTED}Supported platforms: macOS ARM64, Linux x64${NC}"
     exit 1
     ;;
 esac
 
-target="$os-$arch"
+target="$combo"
 filename="$APP-$target"
 
 if [ "$os" = "linux" ]; then

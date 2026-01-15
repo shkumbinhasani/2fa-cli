@@ -17,20 +17,13 @@ permissions:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: macos-latest
             target: darwin-arm64
-            bun_target: bun-darwin-arm64
-          - os: macos-latest
-            target: darwin-x64
-            bun_target: bun-darwin-x64
           - os: ubuntu-latest
             target: linux-x64
-            bun_target: bun-linux-x64
-          - os: ubuntu-latest
-            target: linux-arm64
-            bun_target: bun-linux-arm64
 
     runs-on: ${{ matrix.os }}
 
@@ -47,7 +40,7 @@ jobs:
 
       - name: Build executable
         run: |
-          bun build --compile --minify --target=${{ matrix.bun_target }} src/index.tsx --outfile 2fa-${{ matrix.target }}
+          bun build --compile --minify src/index.tsx --outfile 2fa-${{ matrix.target }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -102,6 +95,10 @@ jobs:
             ```
 
             Or download the binary for your platform below.
+
+            ### Supported Platforms
+            - macOS ARM64 (Apple Silicon)
+            - Linux x64
 
             ## What's Changed
 
