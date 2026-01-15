@@ -4,7 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun run --watch src/index.tsx"
+    "start": "bun run src/index.tsx",
+    "dev": "bun run --watch src/index.tsx",
+    "build": "bun build --compile --minify src/index.tsx --outfile 2fa"
   },
   "devDependencies": {
     "@types/bun": "latest"
@@ -15,6 +17,8 @@
   "dependencies": {
     "@opentui/core": "^0.1.72",
     "@opentui/react": "^0.1.72",
+    "jimp": "^1.6.0",
+    "jsqr": "^1.4.0",
     "react": "^19.2.3"
   }
 }
