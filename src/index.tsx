@@ -1,3 +1,13 @@
+import { runCli } from "./cli";
+
+// Handle CLI commands first
+const args = process.argv.slice(2);
+const handled = await runCli(args);
+if (handled) {
+  process.exit(0);
+}
+
+// Launch TUI
 import { createCliRenderer, TextAttributes } from "@opentui/core";
 import { createRoot, useKeyboard } from "@opentui/react";
 import { useState, useEffect, useCallback } from "react";
